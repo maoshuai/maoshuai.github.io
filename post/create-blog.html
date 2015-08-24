@@ -10,7 +10,7 @@
   <meta name="description" content="记得上一次持续写博客还是在大学的时候，一晃都五年了，当年那个坚持劲儿，因为毕业的原因中断了，竟再也没有重试起来。也算自己孤陋寡闻，竟不知道GitHub也可以放置静态博客了。加上一些静态网页生成器，托管个人博客，简直是实惠、稳定又有逼格。尤其是对程序员来说，GitHub就是自己的Facebook，不稍微打扮一下，都...">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://maoshuai.github.io/blog/2015/08/24/learn-github.html">
+  <link rel="canonical" href="http://maoshuai.github.io/post/create-blog.html">
   <link rel="alternate" type="application/rss+xml" title="maoshuai blog" href="http://maoshuai.github.io/feed.xml" />
 </head>
 
@@ -54,7 +54,15 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <p>记得上一次持续写博客还是在大学的时候，一晃都五年了，当年那个坚持劲儿，因为毕业的原因中断了，竟再也没有重试起来。<br />
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">初步搭建我的GitHub Page</h1>
+    <p class="post-meta">Aug 24, 2015</p>
+  </header>
+
+  <article class="post-content">
+    <p>记得上一次持续写博客还是在大学的时候，一晃都五年了，当年那个坚持劲儿，因为毕业的原因中断了，竟再也没有重试起来。<br />
 也算自己孤陋寡闻，竟不知道GitHub也可以放置静态博客了。加上一些静态网页生成器，托管个人博客，简直是实惠、稳定又有逼格。<br />
 尤其是对程序员来说，GitHub就是自己的Facebook，不稍微打扮一下，都不好意思见人了。</p>
 
@@ -77,9 +85,28 @@
 4. awk与sed基础用法<br />
 4. Python初探</p>
 
+
+    <!--新闻打分版，可实现对每篇新闻自动星级评分-->
+	<div id="SOHUCS" sid="/post/create-blog"></div>
+	<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
+	<script type="text/javascript">
+	    window._config = { showScore: true };
+	    window.changyan.api.config({
+	        appid: 'cyrWrYeG2',
+	        conf: 'prod_e019d93b0728d968ce162b82b0fd4251'
+	    });
+	</script> 
+	<!--新闻打分结束-->
+
+  </article>
+
+</div>
+
       </div>
+
     </div>
 
+    
     <footer class="site-footer">
 
   <div class="wrapper">
