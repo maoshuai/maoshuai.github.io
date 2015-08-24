@@ -5,12 +5,40 @@
     <description></description>
     <link>http://maoshuai.github.io/</link>
     <atom:link href="http://maoshuai.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 24 Aug 2015 22:50:52 +0800</pubDate>
-    <lastBuildDate>Mon, 24 Aug 2015 22:50:52 +0800</lastBuildDate>
+    <pubDate>Mon, 24 Aug 2015 23:18:13 +0800</pubDate>
+    <lastBuildDate>Mon, 24 Aug 2015 23:18:13 +0800</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
-        <title>初步搭建我的GitHub Page</title>
+        <title>为静态博客增加评论插件</title>
+        <description>&lt;p&gt;经过上周末的努力，jekyll搭建的静态博客已经形成。但作为一个交流平台，总希望能有互动，也就是评论。&lt;/p&gt;
+
+&lt;p&gt;传统上，都是在自己的服务器实现，比如&lt;code&gt;WordPress&lt;/code&gt;，但既然选择了静态博客，&lt;em&gt;你就失去了服务器端的能力&lt;/em&gt;。
+但还好，有各种社会化评论插件，通过简单的JavaScript即可完成强大的评论功能。所有评论内容，都托管在第三方平台。十分方便。&lt;/p&gt;
+
+&lt;p&gt;比较常见的有国外的Disqus，国内的多说、友言、搜狐畅言。&lt;br /&gt;
+并且，这些社会化评论插件，远远超过了简单的评论及回复功能。增添了诸如：社交账号登陆、网站统计等实用功能。&lt;/p&gt;
+
+&lt;p&gt;我简单的比较了之后，最终选择了“搜狐畅言”，也就是您现在在文章下方看到的。&lt;br /&gt;
+选择搜狐畅言，主要基于几点考虑：&lt;br /&gt;
+1. 国内访问更快。&lt;br /&gt;
+2. 支持国内的社交平台。&lt;br /&gt;
+3. 搜狐公司出品，相对更可靠些吧。当然，也许只是我天真的愿望吧。&lt;/p&gt;
+
+&lt;p&gt;先不说好坏，重要的是开始，并且是立即开始。不排除观察一段时间转换的可能。&lt;br /&gt;
+好在，我看畅言&lt;code&gt;支持数据导出&lt;/code&gt;，这点非常重要，否则你只能在一棵树上吊死，不是我希望的。&lt;/p&gt;
+</description>
+        <pubDate>Tue, 25 Aug 2015 07:03:00 +0800</pubDate>
+        <link>http://maoshuai.github.io/post/crete-blog-comment-plugin.html</link>
+        <guid isPermaLink="true">http://maoshuai.github.io/post/crete-blog-comment-plugin.html</guid>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>初步搭建我的GitHub Pages</title>
         <description>&lt;p&gt;记得上一次持续写博客还是在大学的时候，一晃都五年了，当年那个坚持劲儿，因为毕业的原因中断了，竟再也没有重试起来。&lt;br /&gt;
 也算自己孤陋寡闻，竟不知道GitHub也可以放置静态博客了。加上一些静态网页生成器，托管个人博客，简直是实惠、稳定又有逼格。&lt;br /&gt;
 尤其是对程序员来说，GitHub就是自己的Facebook，不稍微打扮一下，都不好意思见人了。&lt;/p&gt;

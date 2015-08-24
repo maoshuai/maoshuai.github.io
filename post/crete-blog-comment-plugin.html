@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>maoshuai blog</title>
-  <meta name="description" content="">
+  <title>为静态博客增加评论插件</title>
+  <meta name="description" content="经过上周末的努力，jekyll搭建的静态博客已经形成。但作为一个交流平台，总希望能有互动，也就是评论。">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://maoshuai.github.io/">
+  <link rel="canonical" href="http://maoshuai.github.io/post/crete-blog-comment-plugin.html">
   <link rel="alternate" type="application/rss+xml" title="maoshuai blog" href="http://maoshuai.github.io/feed.xml" />
 </head>
 
@@ -54,31 +54,45 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <div class="post">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title">为静态博客增加评论插件</h1>
+    <p class="post-meta">Aug 25, 2015</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">Aug 25, 2015</span>
+  <article class="post-content">
+    <p>经过上周末的努力，jekyll搭建的静态博客已经形成。但作为一个交流平台，总希望能有互动，也就是评论。</p>
 
-        <h2>
-          <a class="post-link" href="/post/crete-blog-comment-plugin.html">为静态博客增加评论插件</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Aug 24, 2015</span>
+<p>传统上，都是在自己的服务器实现，比如<code>WordPress</code>，但既然选择了静态博客，<em>你就失去了服务器端的能力</em>。
+但还好，有各种社会化评论插件，通过简单的JavaScript即可完成强大的评论功能。所有评论内容，都托管在第三方平台。十分方便。</p>
 
-        <h2>
-          <a class="post-link" href="/post/create-blog.html">初步搭建我的GitHub Pages</a>
-        </h2>
-      </li>
-    
-  </ul>
+<p>比较常见的有国外的Disqus，国内的多说、友言、搜狐畅言。<br />
+并且，这些社会化评论插件，远远超过了简单的评论及回复功能。增添了诸如：社交账号登陆、网站统计等实用功能。</p>
 
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+<p>我简单的比较了之后，最终选择了“搜狐畅言”，也就是您现在在文章下方看到的。<br />
+选择搜狐畅言，主要基于几点考虑：<br />
+1. 国内访问更快。<br />
+2. 支持国内的社交平台。<br />
+3. 搜狐公司出品，相对更可靠些吧。当然，也许只是我天真的愿望吧。</p>
+
+<p>先不说好坏，重要的是开始，并且是立即开始。不排除观察一段时间转换的可能。<br />
+好在，我看畅言<code>支持数据导出</code>，这点非常重要，否则你只能在一棵树上吊死，不是我希望的。</p>
+
+
+    <!--新闻打分版，可实现对每篇新闻自动星级评分-->
+	<div id="SOHUCS" sid="/post/crete-blog-comment-plugin"></div>
+	<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
+	<script type="text/javascript">
+	    window._config = { showScore: true };
+	    window.changyan.api.config({
+	        appid: 'cyrWrYeG2',
+	        conf: 'prod_e019d93b0728d968ce162b82b0fd4251'
+	    });
+	</script> 
+	<!--新闻打分结束-->
+
+  </article>
 
 </div>
 
