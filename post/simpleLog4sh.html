@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>简单shell日志框架simpleLog4sh</title>
+  <meta name="description" content="simpleLog4sh是我从之前写的shell脚本里提取的shell日志工具类。简单改进以后，形成极为简单的shell日志框架。目前发布在GitHub上： https://github.com/maoshuai/simpleLog4sh">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://maoshuai.github.io/post/simpleLog4sh.html">
+  <link rel="alternate" type="application/rss+xml" title="maoshuai blog" href="http://maoshuai.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">maoshuai blog</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">简单shell日志框架simpleLog4sh</h1>
+    <p class="post-meta">Aug 27, 2015</p>
+  </header>
+
+  <article class="post-content">
+    <p>simpleLog4sh是我从之前写的shell脚本里提取的shell日志工具类。简单改进以后，形成极为简单的shell日志框架。目前发布在GitHub上： 
+<a href="https://github.com/maoshuai/simpleLog4sh">https://github.com/maoshuai/simpleLog4sh</a></p>
+
+<h1 id="section">简介</h1>
+<p><strong>simpleLog4sh</strong>是一个极为简单的shell日志框架，甚至不应该叫日志框架。<br />
+与其他shell日志框架不同，它仅仅是一个：</p>
+
+<p><strong>只有几十行的纯shell脚本，没有任何依赖</strong>。</p>
+
+<p>但通过简单的封装，这个小shell可以提供诸如：<br />
+1. logInfo，logDebug等多级别日志输出<br />
+2. 日志记录带有时间戳和日志级别<br />
+3. 将日志输出到指定文件<br />
+4. 日志文件按日期进行归档 <br />
+5. 抛出异常</p>
+
+<p><strong>simpleLog4sh</strong>不期望做到像Apache日志框架一样复杂，仅仅在您写toy小程序的时候，能帮助你实现最简单的日志功能，而不必总是echo。</p>
+
+<p>您通过下面的语句，：</p>
+
+<p><code>
+logInfo hello, world
+logDebug "hello, world" # 推荐将所有的内容用双引号包围
+</code>
+输出内容举例如下：</p>
+
+<p><code>
+2015-08-26 20:12:21 [test.sh] (INFO) hello, world
+2015-08-26 20:12:21 [test.sh] (DEBUG) hello, world
+</code></p>
+
+<h1 id="section-1">使用方法举例</h1>
+<p>## 导入simpleLog4sh
+在您的shell开头导入即可，可以参考/test/test.sh的中的用法：</p>
+
+<p><code>
+. ../src/simplelog4sh.sh
+</code></p>
+
+<h2 id="logxxx">logXXX语句</h2>
+<p>simpleLog4sh提供了四个日志级别的方法，他们分别是<br />
+1. <code>logDebug</code><br />
+2. <code>logInfo</code><br />
+3. <code>logWarn</code> <br />
+4. <code>logError</code></p>
+
+<p>用法很简单，所有的参数都会被当做日志内容记录，比如：</p>
+
+<p><code>
+logInfo hello, world
+logDebug "hello, world" # 推荐将所有的内容用双引号包围
+</code>
+输出内容举例如下：</p>
+
+<p><code>
+2015-08-26 20:03:18 [test.sh] (INFO) hello, this logInfo
+2015-08-26 20:12:21 [test.sh] (DEBUG) hello, logDebug
+2015-08-26 20:12:21 [test.sh] (INFO) hello, logInfo
+2015-08-26 20:12:21 [test.sh] (WARN) hello, logWarn
+2015-08-26 20:12:21 [test.sh] (ERROR) hello, logError
+2015-08-26 20:12:21 [test.sh] (ECHO) hello, myEcho
+2015-08-26 20:12:21 [test.sh] (ECHO_ERROR) hello, myEchoError
+2015-08-26 20:13:26 [test.sh] (DEBUG) hello, logDebug
+</code></p>
+
+<h2 id="section-2">设置日志级别</h2>
+<p>simpleLog4sh支持6个日志级别，含义与Apache日志框架类似：<br />
+1. ALL<br />
+2. DEBUG<br />
+3. INFO<br />
+4. WARN<br />
+5. ERROR<br />
+6. OFF</p>
+
+<p>如果要设置指定的日志级别，请在导入simpleLogsh之后，export变量<code>LOG_LEVEL</code>，可设置为如下预置常量：</p>
+
+<p><code>
+LOG_LEVEL_ALL  
+LOG_LEVEL_DEBUG  
+LOG_LEVEL_INFO  
+LOG_LEVEL_WARN  
+LOG_LEVEL_ERROR  
+LOG_LEVEL_OFF  
+</code></p>
+
+<h2 id="throw">throw语句</h2>
+<p><code>throw</code>语句类似java语言中抛异常。通过使用<code>throw</code>语句，达到类似抛异常的效果。比如：</p>
+
+<p><code>
+throw "ParamsNumberException: need 2 params"
+</code>
+使用throw语句，程序将在stderr输出上述语句，同时在日志文件以LOG_LEVEL_ERROR级别记录。最后程序会意退出码1退出。</p>
+
+<h2 id="myechomyechoerror">myEcho与myEchoError语句</h2>
+<p><code>myEcho</code>和<code>myEchoError</code>与shell的<code>echo</code>语句类似，但有两点增强：<br />
+1. <code>myEcho</code>和<code>myEchoError</code>不仅会输出到控制台，还会输出到日志文件。<br />
+2. <code>myEchoError</code>的输出是stdErr</p>
+
+<h2 id="section-3">日志路径与日志文件滚动</h2>
+<p>默认程序的输出日志路径是<code>/tmp/simplelog4sh</code>，并在此目录下面生成已当前日期命名的日志文件，类似如下：</p>
+
+<p><code>
+-rw-r--r--  1 maoshuai  wheel  1839  8 25 23:48 log_20150825.log
+-rw-r--r--  1 maoshuai  wheel  1839  8 26 20:32 log_20150826.log
+</code>
+当然，你可以通过export变量<code>SIMPLE_LOG_4_SH_DIR</code>指定你的日志路径，替换上述默认值。比如：<code>export SIMPLE_LOG_4_SH_DIR=/var/log</code>，则所有日志都打印到<code>/var/log</code>目录下面</p>
+
+
+
+    <!--新闻打分版，可实现对每篇新闻自动星级评分-->
+	<div id="SOHUCS" sid="/post/simpleLog4sh"></div>
+	<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
+	<script type="text/javascript">
+	    window._config = { showScore: true };
+	    window.changyan.api.config({
+	        appid: 'cyrWrYeG2',
+	        conf: 'prod_e019d93b0728d968ce162b82b0fd4251'
+	    });
+	</script> 
+	<!--新闻打分结束-->
+
+  </article>
+
+</div>
+
+      </div>
+
+    </div>
+
+    
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">maoshuai blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>maoshuai blog</li>
+          <li><a href="mailto:"></a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/maoshuai">
+              <span class="icon  icon--github">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+                </svg>
+              </span>
+
+              <span class="username">maoshuai</span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/oneb_it">
+              <span class="icon  icon--twitter">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809
+                  c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/>
+                </svg>
+              </span>
+
+              <span class="username">oneb_it</span>
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text"></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
