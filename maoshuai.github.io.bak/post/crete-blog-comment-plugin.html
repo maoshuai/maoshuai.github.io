@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>简单shell日志框架simpleLog4sh</title>
-  <meta name="description" content="simpleLog4sh是我从之前写的shell脚本里提取的shell日志工具类。简单改进以后，形成极为简单的shell日志框架。目前发布在GitHub上： https://github.com/maoshuai/simpleLog4sh">
+  <title>为静态博客增加评论插件</title>
+  <meta name="description" content="经过上周末的努力，jekyll搭建的静态博客已经形成。但作为一个交流平台，总希望能有互动，也就是评论。">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://maoshuai.github.io/post/simplelog4sh.html">
+  <link rel="canonical" href="http://maoshuai.github.io/post/crete-blog-comment-plugin.html">
   <link rel="alternate" type="application/rss+xml" title="maoshuai blog" href="http://maoshuai.github.io/feed.xml" />
 </head>
 
@@ -57,122 +57,31 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">简单shell日志框架simpleLog4sh</h1>
-    <p class="post-meta">Aug 27, 2015</p>
+    <h1 class="post-title">为静态博客增加评论插件</h1>
+    <p class="post-meta">Aug 25, 2015</p>
   </header>
 
   <article class="post-content">
-    <p>simpleLog4sh是我从之前写的shell脚本里提取的shell日志工具类。简单改进以后，形成极为简单的shell日志框架。目前发布在GitHub上： 
-<a href="https://github.com/maoshuai/simpleLog4sh">https://github.com/maoshuai/simpleLog4sh</a></p>
+    <p>经过上周末的努力，jekyll搭建的静态博客已经形成。但作为一个交流平台，总希望能有互动，也就是评论。</p>
 
-<h1 id="section">简介</h1>
-<p><strong>simpleLog4sh</strong>是一个极为简单的shell日志框架，甚至不应该叫日志框架。<br />
-与其他shell日志框架不同，它仅仅是一个：</p>
+<p>传统上，都是在自己的服务器实现，比如<code>WordPress</code>，但既然选择了静态博客，<em>你就失去了服务器端的能力</em>。
+但还好，有各种社会化评论插件，通过简单的JavaScript即可完成强大的评论功能。所有评论内容，都托管在第三方平台。十分方便。</p>
 
-<p><strong>只有几十行的纯shell脚本，没有任何依赖</strong>。</p>
+<p>比较常见的有国外的Disqus，国内的多说、友言、搜狐畅言。<br />
+并且，这些社会化评论插件，远远超过了简单的评论及回复功能。增添了诸如：社交账号登陆、网站统计等实用功能。</p>
 
-<p>但通过简单的封装，这个小shell可以提供诸如：<br />
-1. logInfo，logDebug等多级别日志输出<br />
-2. 日志记录带有时间戳和日志级别<br />
-3. 将日志输出到指定文件<br />
-4. 日志文件按日期进行归档 <br />
-5. 抛出异常</p>
+<p>我简单的比较了之后，最终选择了“搜狐畅言”，也就是您现在在文章下方看到的。<br />
+选择搜狐畅言，主要基于几点考虑：<br />
+1. 国内访问更快。<br />
+2. 支持国内的社交平台。<br />
+3. 搜狐公司出品，相对更可靠些吧。当然，也许只是我天真的愿望吧。</p>
 
-<p><strong>simpleLog4sh</strong>不期望做到像Apache日志框架一样复杂，仅仅在您写toy小程序的时候，能帮助你实现最简单的日志功能，而不必总是echo。</p>
-
-<p>您通过下面的语句，：</p>
-
-<p><code>
-logInfo hello, world  
-logDebug "hello, world" # 推荐将所有的内容用双引号包围  
-</code>
-输出内容举例如下：</p>
-
-<p><code>
-2015-08-26 20:12:21 [test.sh] (INFO) hello, world  
-2015-08-26 20:12:21 [test.sh] (DEBUG) hello, world  
-</code></p>
-
-<h1 id="section-1">使用方法举例</h1>
-<p>## 导入simpleLog4sh
-在您的shell开头导入即可，可以参考/test/test.sh的中的用法：</p>
-
-<p><code>
-. ../src/simplelog4sh.sh
-</code></p>
-
-<h2 id="logxxx">logXXX语句</h2>
-<p>simpleLog4sh提供了四个日志级别的方法，他们分别是<br />
-1. <code>logDebug</code><br />
-2. <code>logInfo</code><br />
-3. <code>logWarn</code> <br />
-4. <code>logError</code></p>
-
-<p>用法很简单，所有的参数都会被当做日志内容记录，比如：</p>
-
-<p><code>
-logInfo hello, world  
-logDebug "hello, world" # 推荐将所有的内容用双引号包围  
-</code>
-输出内容举例如下：</p>
-
-<p><code>
-2015-08-26 20:03:18 [test.sh] (INFO) hello, this logInfo  
-2015-08-26 20:12:21 [test.sh] (DEBUG) hello, logDebug  
-2015-08-26 20:12:21 [test.sh] (INFO) hello, logInfo  
-2015-08-26 20:12:21 [test.sh] (WARN) hello, logWarn  
-2015-08-26 20:12:21 [test.sh] (ERROR) hello, logError  
-2015-08-26 20:12:21 [test.sh] (ECHO) hello, myEcho  
-2015-08-26 20:12:21 [test.sh] (ECHO_ERROR) hello, myEchoError  
-2015-08-26 20:13:26 [test.sh] (DEBUG) hello, logDebug  
-</code></p>
-
-<h2 id="section-2">设置日志级别</h2>
-<p>simpleLog4sh支持6个日志级别，含义与Apache日志框架类似：<br />
-1. ALL<br />
-2. DEBUG<br />
-3. INFO<br />
-4. WARN<br />
-5. ERROR<br />
-6. OFF</p>
-
-<p>如果要设置指定的日志级别，请在导入simpleLogsh之后，export变量<code>LOG_LEVEL</code>，可设置为如下预置常量：</p>
-
-<p><code>
-LOG_LEVEL_ALL  
-LOG_LEVEL_DEBUG  
-LOG_LEVEL_INFO  
-LOG_LEVEL_WARN  
-LOG_LEVEL_ERROR  
-LOG_LEVEL_OFF  
-</code></p>
-
-<h2 id="throw">throw语句</h2>
-<p><code>throw</code>语句类似java语言中抛异常。通过使用<code>throw</code>语句，达到类似抛异常的效果。比如：</p>
-
-<p><code>
-throw "ParamsNumberException: need 2 params"
-</code>
-使用throw语句，程序将在stderr输出上述语句，同时在日志文件以LOG_LEVEL_ERROR级别记录。最后程序会意退出码1退出。</p>
-
-<h2 id="myechomyechoerror">myEcho与myEchoError语句</h2>
-<p><code>myEcho</code>和<code>myEchoError</code>与shell的<code>echo</code>语句类似，但有两点增强：<br />
-1. <code>myEcho</code>和<code>myEchoError</code>不仅会输出到控制台，还会输出到日志文件。<br />
-2. <code>myEchoError</code>的输出是stdErr</p>
-
-<h2 id="section-3">日志路径与日志文件滚动</h2>
-<p>默认程序的输出日志路径是<code>/tmp/simplelog4sh</code>，并在此目录下面生成已当前日期命名的日志文件，类似如下：</p>
-
-<p><code>
--rw-r--r--  1 maoshuai  wheel  1839  8 25 23:48 log_20150825.log  
--rw-r--r--  1 maoshuai  wheel  1839  8 26 20:32 log_20150826.log  
-</code>
-当然，你可以通过export变量<code>SIMPLE_LOG_4_SH_DIR</code>指定你的日志路径，替换上述默认值。比如：<code>export SIMPLE_LOG_4_SH_DIR=/var/log</code>，则所有日志都打印到<code>/var/log</code>目录下面</p>
-
+<p>先不说好坏，重要的是开始，并且是立即开始。不排除观察一段时间转换的可能。<br />
+好在，我看畅言<code>支持数据导出</code>，这点非常重要，否则你只能在一棵树上吊死，不是我希望的。</p>
 
 
     <!--新闻打分版，可实现对每篇新闻自动星级评分-->
-	<div id="SOHUCS" sid="/post/simpleLog4sh"></div>
+	<div id="SOHUCS" sid="/post/crete-blog-comment-plugin"></div>
 	<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
 	<script type="text/javascript">
 	    window._config = { showScore: true };

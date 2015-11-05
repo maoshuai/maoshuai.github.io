@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>简单shell日志框架simpleLog4sh</title>
-  <meta name="description" content="simpleLog4sh是我从之前写的shell脚本里提取的shell日志工具类。简单改进以后，形成极为简单的shell日志框架。目前发布在GitHub上： https://github.com/maoshuai/simpleLog4sh">
+  <title>读《傅雷家书》</title>
+  <meta name="description" content="傅雷，我国著名文学翻译家和文艺评论家。同时，他对自己的两个孩子的教育，可为苦心孤诣、堪称楷模。长子傅聪是世界著名的钢琴大师。次子付敏也是著名的特级教师。想必，出生在这样一个书香门第的艺术气息的家庭，实在有幸。作为普通百姓，读读其家书，也算沾点雨露吧。">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://maoshuai.github.io/post/simplelog4sh.html">
+  <link rel="canonical" href="http://maoshuai.github.io/post/reading-fulei-letter.html">
   <link rel="alternate" type="application/rss+xml" title="maoshuai blog" href="http://maoshuai.github.io/feed.xml" />
 </head>
 
@@ -57,122 +57,63 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">简单shell日志框架simpleLog4sh</h1>
-    <p class="post-meta">Aug 27, 2015</p>
+    <h1 class="post-title">读《傅雷家书》</h1>
+    <p class="post-meta">Nov 5, 2015</p>
   </header>
 
   <article class="post-content">
-    <p>simpleLog4sh是我从之前写的shell脚本里提取的shell日志工具类。简单改进以后，形成极为简单的shell日志框架。目前发布在GitHub上： 
-<a href="https://github.com/maoshuai/simpleLog4sh">https://github.com/maoshuai/simpleLog4sh</a></p>
+    <p>傅雷，我国著名文学翻译家和文艺评论家。同时，他对自己的两个孩子的教育，可为苦心孤诣、堪称楷模。<br />
+长子傅聪是世界著名的钢琴大师。次子付敏也是著名的特级教师。想必，出生在这样一个书香门第的艺术气息的家庭，实在有幸。作为普通百姓，读读其家书，也算沾点雨露吧。</p>
 
-<h1 id="section">简介</h1>
-<p><strong>simpleLog4sh</strong>是一个极为简单的shell日志框架，甚至不应该叫日志框架。<br />
-与其他shell日志框架不同，它仅仅是一个：</p>
+<p>《傅雷家书》是主要是傅雷夫妇针对长子傅聪留学期间的书信，从1954年到1966年（直到文革期间愤而离世）。内容涉及对傅聪学业、爱情婚姻、工作。<br />
+小到来信的信封上的字体大小，大到艺术修养、夫妻相处——真是无微不至的关心。有这样以为导师一样的父亲真好。</p>
 
-<p><strong>只有几十行的纯shell脚本，没有任何依赖</strong>。</p>
+<p>书中有不少篇幅都是在于儿子讨论音乐方面的东西，由于认识有限，也只能跳过了。<br />
+其他的，就是一些生活、思想上面的沟通。</p>
 
-<p>但通过简单的封装，这个小shell可以提供诸如：<br />
-1. logInfo，logDebug等多级别日志输出<br />
-2. 日志记录带有时间戳和日志级别<br />
-3. 将日志输出到指定文件<br />
-4. 日志文件按日期进行归档 <br />
-5. 抛出异常</p>
+<p>摘抄写比较有启发的段落吧： 
+&gt;把自己的思想写下来（不管在信中或是用别的方式），比着光在脑中空想是大不同的。写下来需要正确精密的思想，所以写在纸上的自我检讨，格外深刻，对自己也印象深刻。</p>
 
-<p><strong>simpleLog4sh</strong>不期望做到像Apache日志框架一样复杂，仅仅在您写toy小程序的时候，能帮助你实现最简单的日志功能，而不必总是echo。</p>
+<p>文字真是一个神奇的东西。一旦写的时候，会让你认真思考，同时总会有些你之前没有认识到的东西蹦出来。</p>
 
-<p>您通过下面的语句，：</p>
+<blockquote>
+  <p>我以前常和你说的，只有事实才能证明你的心意，只有行动才能表明你的心迹。待朋友不能如此马虎。生性并非“薄情”的人，在行动上做得跟“薄情”一样，是最冤枉的，犯不着的。</p>
+</blockquote>
 
-<p><code>
-logInfo hello, world  
-logDebug "hello, world" # 推荐将所有的内容用双引号包围  
-</code>
-输出内容举例如下：</p>
+<p>再也不要说什么“出发点是好的”，“我也不是为你好”，“我当时就是心情不好才这样”的话了。人与人相处，有时还是挺注重“结果”的。既然你要为他好，就尽量让他感受到行动上的好吧。</p>
 
-<p><code>
-2015-08-26 20:12:21 [test.sh] (INFO) hello, world  
-2015-08-26 20:12:21 [test.sh] (DEBUG) hello, world  
-</code></p>
+<blockquote>
+  <p>想过以后立刻想办法实行，应改的应调整的都应当立刻改，立刻调整，不以任何理由耽搁。</p>
+</blockquote>
 
-<h1 id="section-1">使用方法举例</h1>
-<p>## 导入simpleLog4sh
-在您的shell开头导入即可，可以参考/test/test.sh的中的用法：</p>
+<p>最重要的是行动，并且是立即开始！</p>
 
-<p><code>
-. ../src/simplelog4sh.sh
-</code></p>
+<blockquote>
+  <p>你说的很对，“学然后知不足”，只有不学无术或是浅尝即止的人才会自大自满。</p>
+</blockquote>
 
-<h2 id="logxxx">logXXX语句</h2>
-<p>simpleLog4sh提供了四个日志级别的方法，他们分别是<br />
-1. <code>logDebug</code><br />
-2. <code>logInfo</code><br />
-3. <code>logWarn</code> <br />
-4. <code>logError</code></p>
+<p>知道自己的无知</p>
 
-<p>用法很简单，所有的参数都会被当做日志内容记录，比如：</p>
+<blockquote>
+  <p>以我看来，最主要的是控制事情，而勿消极的为事情所控制。假如你们有一、两个星期闲暇，不是应该事先有个计划，哪几天招待朋友，哪几天轻松一下，哪几天把时间花在认真严肃的阅读与研究之上？</p>
+</blockquote>
 
-<p><code>
-logInfo hello, world  
-logDebug "hello, world" # 推荐将所有的内容用双引号包围  
-</code>
-输出内容举例如下：</p>
+<p>闲暇的时间，更容易坠入无序和堕落，更需要自我约束</p>
 
-<p><code>
-2015-08-26 20:03:18 [test.sh] (INFO) hello, this logInfo  
-2015-08-26 20:12:21 [test.sh] (DEBUG) hello, logDebug  
-2015-08-26 20:12:21 [test.sh] (INFO) hello, logInfo  
-2015-08-26 20:12:21 [test.sh] (WARN) hello, logWarn  
-2015-08-26 20:12:21 [test.sh] (ERROR) hello, logError  
-2015-08-26 20:12:21 [test.sh] (ECHO) hello, myEcho  
-2015-08-26 20:12:21 [test.sh] (ECHO_ERROR) hello, myEchoError  
-2015-08-26 20:13:26 [test.sh] (DEBUG) hello, logDebug  
-</code></p>
+<blockquote>
+  <p>父母子女之间的摩擦与冲突，甚至是反目，当时虽然对双方都是极痛苦的事，从长里看对儿女的成长倒是利多弊少。</p>
+</blockquote>
 
-<h2 id="section-2">设置日志级别</h2>
-<p>simpleLog4sh支持6个日志级别，含义与Apache日志框架类似：<br />
-1. ALL<br />
-2. DEBUG<br />
-3. INFO<br />
-4. WARN<br />
-5. ERROR<br />
-6. OFF</p>
+<p>不错的角度</p>
 
-<p>如果要设置指定的日志级别，请在导入simpleLogsh之后，export变量<code>LOG_LEVEL</code>，可设置为如下预置常量：</p>
-
-<p><code>
-LOG_LEVEL_ALL  
-LOG_LEVEL_DEBUG  
-LOG_LEVEL_INFO  
-LOG_LEVEL_WARN  
-LOG_LEVEL_ERROR  
-LOG_LEVEL_OFF  
-</code></p>
-
-<h2 id="throw">throw语句</h2>
-<p><code>throw</code>语句类似java语言中抛异常。通过使用<code>throw</code>语句，达到类似抛异常的效果。比如：</p>
-
-<p><code>
-throw "ParamsNumberException: need 2 params"
-</code>
-使用throw语句，程序将在stderr输出上述语句，同时在日志文件以LOG_LEVEL_ERROR级别记录。最后程序会意退出码1退出。</p>
-
-<h2 id="myechomyechoerror">myEcho与myEchoError语句</h2>
-<p><code>myEcho</code>和<code>myEchoError</code>与shell的<code>echo</code>语句类似，但有两点增强：<br />
-1. <code>myEcho</code>和<code>myEchoError</code>不仅会输出到控制台，还会输出到日志文件。<br />
-2. <code>myEchoError</code>的输出是stdErr</p>
-
-<h2 id="section-3">日志路径与日志文件滚动</h2>
-<p>默认程序的输出日志路径是<code>/tmp/simplelog4sh</code>，并在此目录下面生成已当前日期命名的日志文件，类似如下：</p>
-
-<p><code>
--rw-r--r--  1 maoshuai  wheel  1839  8 25 23:48 log_20150825.log  
--rw-r--r--  1 maoshuai  wheel  1839  8 26 20:32 log_20150826.log  
-</code>
-当然，你可以通过export变量<code>SIMPLE_LOG_4_SH_DIR</code>指定你的日志路径，替换上述默认值。比如：<code>export SIMPLE_LOG_4_SH_DIR=/var/log</code>，则所有日志都打印到<code>/var/log</code>目录下面</p>
-
+<p>傅雷青年留学法国，毕生也以翻译法国文学作品所著名。父子间的谈话，反复提到写文学作品。 从《傅雷家书》中，看到这几本书，感觉不读都不行的：<br />
+1. 《约翰·克里斯朵夫》——罗曼·罗兰（法国）<br />
+2. 《人生五大问题》——罗曼·罗兰（法国）<br />
+3. 《幸福之路》——波特兰·罗素（英国）</p>
 
 
     <!--新闻打分版，可实现对每篇新闻自动星级评分-->
-	<div id="SOHUCS" sid="/post/simpleLog4sh"></div>
+	<div id="SOHUCS" sid="/post/reading-fulei-letter"></div>
 	<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
 	<script type="text/javascript">
 	    window._config = { showScore: true };

@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>简单shell日志框架simpleLog4sh</title>
-  <meta name="description" content="simpleLog4sh是我从之前写的shell脚本里提取的shell日志工具类。简单改进以后，形成极为简单的shell日志框架。目前发布在GitHub上： https://github.com/maoshuai/simpleLog4sh">
+  <title>初步搭建我的GitHub Pages</title>
+  <meta name="description" content="记得上一次持续写博客还是在大学的时候，一晃都五年了，当年那个坚持劲儿，因为毕业的原因中断了，竟再也没有重试起来。也算自己孤陋寡闻，竟不知道GitHub也可以放置静态博客了。加上一些静态网页生成器，托管个人博客，简直是实惠、稳定又有逼格。尤其是对程序员来说，GitHub就是自己的Facebook，不稍微打扮一下，都...">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://maoshuai.github.io/post/simplelog4sh.html">
+  <link rel="canonical" href="http://maoshuai.github.io/post/create-blog.html">
   <link rel="alternate" type="application/rss+xml" title="maoshuai blog" href="http://maoshuai.github.io/feed.xml" />
 </head>
 
@@ -57,122 +57,37 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">简单shell日志框架simpleLog4sh</h1>
-    <p class="post-meta">Aug 27, 2015</p>
+    <h1 class="post-title">初步搭建我的GitHub Pages</h1>
+    <p class="post-meta">Aug 24, 2015</p>
   </header>
 
   <article class="post-content">
-    <p>simpleLog4sh是我从之前写的shell脚本里提取的shell日志工具类。简单改进以后，形成极为简单的shell日志框架。目前发布在GitHub上： 
-<a href="https://github.com/maoshuai/simpleLog4sh">https://github.com/maoshuai/simpleLog4sh</a></p>
+    <p>记得上一次持续写博客还是在大学的时候，一晃都五年了，当年那个坚持劲儿，因为毕业的原因中断了，竟再也没有重试起来。<br />
+也算自己孤陋寡闻，竟不知道GitHub也可以放置静态博客了。加上一些静态网页生成器，托管个人博客，简直是实惠、稳定又有逼格。<br />
+尤其是对程序员来说，GitHub就是自己的Facebook，不稍微打扮一下，都不好意思见人了。</p>
 
-<h1 id="section">简介</h1>
-<p><strong>simpleLog4sh</strong>是一个极为简单的shell日志框架，甚至不应该叫日志框架。<br />
-与其他shell日志框架不同，它仅仅是一个：</p>
+<p>花了一个周末的时间，将git复习了一遍，然后用Jekyll将这个GitHub Page搭建起来，以后就有了自己的新家了。</p>
 
-<p><strong>只有几十行的纯shell脚本，没有任何依赖</strong>。</p>
+<p>要能愉快的在GitHub上写博客，需要掌握几项不大不小的技能：<br />
+1. git基本操作<br />
+2. Markdown语法，用来在Jekyll里面书写比较美观的博客。<br />
+3. ruby和rubyGems，稍微了解，用来安装Jekyll<br />
+4. yaml标记语言，Jekyll用得到<br />
+5. liquid模板语言。</p>
 
-<p>但通过简单的封装，这个小shell可以提供诸如：<br />
-1. logInfo，logDebug等多级别日志输出<br />
-2. 日志记录带有时间戳和日志级别<br />
-3. 将日志输出到指定文件<br />
-4. 日志文件按日期进行归档 <br />
-5. 抛出异常</p>
+<p>总之，技多不压身。这些年荒废的，都要一点点补回来。<br />
+行走江湖，得有一门手艺，这样，到哪里都有一口饭吃。</p>
 
-<p><strong>simpleLog4sh</strong>不期望做到像Apache日志框架一样复杂，仅仅在您写toy小程序的时候，能帮助你实现最简单的日志功能，而不必总是echo。</p>
-
-<p>您通过下面的语句，：</p>
-
-<p><code>
-logInfo hello, world  
-logDebug "hello, world" # 推荐将所有的内容用双引号包围  
-</code>
-输出内容举例如下：</p>
-
-<p><code>
-2015-08-26 20:12:21 [test.sh] (INFO) hello, world  
-2015-08-26 20:12:21 [test.sh] (DEBUG) hello, world  
-</code></p>
-
-<h1 id="section-1">使用方法举例</h1>
-<p>## 导入simpleLog4sh
-在您的shell开头导入即可，可以参考/test/test.sh的中的用法：</p>
-
-<p><code>
-. ../src/simplelog4sh.sh
-</code></p>
-
-<h2 id="logxxx">logXXX语句</h2>
-<p>simpleLog4sh提供了四个日志级别的方法，他们分别是<br />
-1. <code>logDebug</code><br />
-2. <code>logInfo</code><br />
-3. <code>logWarn</code> <br />
-4. <code>logError</code></p>
-
-<p>用法很简单，所有的参数都会被当做日志内容记录，比如：</p>
-
-<p><code>
-logInfo hello, world  
-logDebug "hello, world" # 推荐将所有的内容用双引号包围  
-</code>
-输出内容举例如下：</p>
-
-<p><code>
-2015-08-26 20:03:18 [test.sh] (INFO) hello, this logInfo  
-2015-08-26 20:12:21 [test.sh] (DEBUG) hello, logDebug  
-2015-08-26 20:12:21 [test.sh] (INFO) hello, logInfo  
-2015-08-26 20:12:21 [test.sh] (WARN) hello, logWarn  
-2015-08-26 20:12:21 [test.sh] (ERROR) hello, logError  
-2015-08-26 20:12:21 [test.sh] (ECHO) hello, myEcho  
-2015-08-26 20:12:21 [test.sh] (ECHO_ERROR) hello, myEchoError  
-2015-08-26 20:13:26 [test.sh] (DEBUG) hello, logDebug  
-</code></p>
-
-<h2 id="section-2">设置日志级别</h2>
-<p>simpleLog4sh支持6个日志级别，含义与Apache日志框架类似：<br />
-1. ALL<br />
-2. DEBUG<br />
-3. INFO<br />
-4. WARN<br />
-5. ERROR<br />
-6. OFF</p>
-
-<p>如果要设置指定的日志级别，请在导入simpleLogsh之后，export变量<code>LOG_LEVEL</code>，可设置为如下预置常量：</p>
-
-<p><code>
-LOG_LEVEL_ALL  
-LOG_LEVEL_DEBUG  
-LOG_LEVEL_INFO  
-LOG_LEVEL_WARN  
-LOG_LEVEL_ERROR  
-LOG_LEVEL_OFF  
-</code></p>
-
-<h2 id="throw">throw语句</h2>
-<p><code>throw</code>语句类似java语言中抛异常。通过使用<code>throw</code>语句，达到类似抛异常的效果。比如：</p>
-
-<p><code>
-throw "ParamsNumberException: need 2 params"
-</code>
-使用throw语句，程序将在stderr输出上述语句，同时在日志文件以LOG_LEVEL_ERROR级别记录。最后程序会意退出码1退出。</p>
-
-<h2 id="myechomyechoerror">myEcho与myEchoError语句</h2>
-<p><code>myEcho</code>和<code>myEchoError</code>与shell的<code>echo</code>语句类似，但有两点增强：<br />
-1. <code>myEcho</code>和<code>myEchoError</code>不仅会输出到控制台，还会输出到日志文件。<br />
-2. <code>myEchoError</code>的输出是stdErr</p>
-
-<h2 id="section-3">日志路径与日志文件滚动</h2>
-<p>默认程序的输出日志路径是<code>/tmp/simplelog4sh</code>，并在此目录下面生成已当前日期命名的日志文件，类似如下：</p>
-
-<p><code>
--rw-r--r--  1 maoshuai  wheel  1839  8 25 23:48 log_20150825.log  
--rw-r--r--  1 maoshuai  wheel  1839  8 26 20:32 log_20150826.log  
-</code>
-当然，你可以通过export变量<code>SIMPLE_LOG_4_SH_DIR</code>指定你的日志路径，替换上述默认值。比如：<code>export SIMPLE_LOG_4_SH_DIR=/var/log</code>，则所有日志都打印到<code>/var/log</code>目录下面</p>
-
+<p>接下来的博客计划，希望不要拖太久：<br />
+1. 如果你是程序员，相信我，需要一台Macbook。<br />
+2. Shell编程备忘录<br />
+3. vi和和正则表达式，撬开Linux大门的第一板斧 <br />
+4. awk与sed基础用法<br />
+4. Python初探</p>
 
 
     <!--新闻打分版，可实现对每篇新闻自动星级评分-->
-	<div id="SOHUCS" sid="/post/simpleLog4sh"></div>
+	<div id="SOHUCS" sid="/post/create-blog"></div>
 	<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
 	<script type="text/javascript">
 	    window._config = { showScore: true };
